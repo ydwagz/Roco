@@ -1,0 +1,9 @@
+{
+  "name": "roco",
+  "version": "1.0.0",
+  "description": "RoCo - Free Roblox Clothing Templates",
+  "type": "module",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}

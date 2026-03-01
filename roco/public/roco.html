@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RoCo — Free Roblox Clothing Templates</title>
+<link rel="icon" type="image/png" href="logo.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0b0f1a;--surface:#111827;--card:#151d2e;
+  --border:rgba(99,179,237,0.13);--accent:#3b82f6;--sky:#7dd3fc;
+  --glow:rgba(59,130,246,0.22);--text:#e8eeff;--muted:#6b7fa3;
+  --danger:#ef4444;--success:#22c55e;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(11,15,26,0.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo img{width:36px;height:36px;object-fit:contain;filter:brightness(1.4);}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:5px;color:var(--text);}
+.nav-brand em{color:var(--accent);font-style:normal;}
+.nav-center{display:flex;gap:28px;list-style:none;}
+.nav-center a{color:var(--muted);text-decoration:none;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
+.nav-center a:hover{color:var(--sky);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 22px;border-radius:5px;font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;text-decoration:none;}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 24px var(--glow);}
+.btn-primary:hover{background:#2563eb;transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.18);}
+.btn-outline:hover{border-color:var(--sky);color:var(--sky);}
+.btn-ghost{background:rgba(59,130,246,.1);color:var(--accent);border:1px solid rgba(59,130,246,.25);}
+.btn-ghost:hover{background:var(--accent);color:#fff;}
+.btn-ai{background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border:none;box-shadow:0 0 18px rgba(168,85,247,.3);}
+.btn-ai:hover{filter:brightness(1.15);transform:translateY(-1px);box-shadow:0 0 28px rgba(168,85,247,.45);}
+.btn-sm{padding:7px 16px;font-size:.72rem;}
+.btn-danger{background:var(--danger);color:#fff;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:120px 48px 80px;text-align:center;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.06) 1px,transparent 1px);background-size:50px 50px;animation:gridScroll 25s linear infinite;}
+@keyframes gridScroll{to{background-position:50px 50px;}}
+.hero-blob{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.hero-content{position:relative;z-index:2;max-width:820px;}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);color:var(--sky);font-size:.72rem;letter-spacing:3px;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:32px;animation:fadeUp .7s ease both;}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--sky);box-shadow:0 0 6px var(--sky);}
+h1.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,11vw,9rem);letter-spacing:4px;line-height:.9;animation:fadeUp .7s .08s ease both;}
+.hero-title .ca{color:var(--accent);}
+.hero-title .cb{color:var(--sky);}
+.hero-sub{margin-top:22px;font-size:1rem;color:var(--muted);line-height:1.75;animation:fadeUp .7s .16s ease both;}
+.hero-ctas{margin-top:40px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s .24s ease both;}
+.size-chips{display:flex;gap:12px;justify-content:center;margin-top:32px;flex-wrap:wrap;animation:fadeUp .7s .32s ease both;}
+.size-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 18px;text-align:center;}
+.size-chip-label{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.size-chip-val{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;color:var(--sky);}
+
+/* SECTIONS */
+.section{padding:90px 48px;}
+.section-tag{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:3px;line-height:1;margin-bottom:14px;}
+.section-desc{color:var(--muted);font-size:.92rem;line-height:1.75;max-width:500px;}
+
+/* GALLERY */
+#gallery{background:var(--bg);}
+.gallery-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:16px;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;}
+.ftab{padding:7px 18px;border-radius:100px;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--muted);cursor:pointer;font-family:'Syne',sans-serif;transition:all .2s;}
+.ftab.active,.ftab:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
+.tcard{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;}
+.tcard:hover{transform:translateY(-5px);border-color:rgba(59,130,246,.45);box-shadow:0 18px 50px rgba(0,0,0,.4);}
+.tcard-img{height:170px;background:var(--surface);display:flex;align-items:center;justify-content:center;position:relative;}
+.tcard-img img{width:100%;height:100%;object-fit:contain;padding:12px;}
+.tcard-img-ph{font-size:3rem;opacity:.25;}
+.tcard-badge{position:absolute;top:10px;left:10px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:100px;font-weight:700;}
+.tb-shirt{background:rgba(59,130,246,.2);color:#7dd3fc;border:1px solid rgba(59,130,246,.3);}
+.tb-tshirt{background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.25);}
+.tb-pants{background:rgba(251,146,60,.15);color:#fdba74;border:1px solid rgba(251,146,60,.25);}
+.tcard-body{padding:16px;}
+.tcard-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;margin-bottom:4px;}
+.tcard-meta{font-size:.74rem;color:var(--muted);margin-bottom:14px;}
+.tcard-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:12px;}
+.tcard-by{font-size:.72rem;color:var(--muted);}
+.tcard-by span{color:var(--text);font-weight:600;}
+.empty-state{grid-column:1/-1;text-align:center;padding:80px 20px;}
+.empty-icon{font-size:3.5rem;margin-bottom:14px;opacity:.35;}
+.empty-state p{color:var(--muted);font-size:.9rem;line-height:1.7;}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(5,8,18,.88);backdrop-filter:blur(10px);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;animation:modalIn .25s ease;}
+@keyframes modalIn{from{opacity:0;transform:scale(.96) translateY(16px);}to{opacity:1;transform:none;}}
+.modal-head{padding:22px 26px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:2;}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:3px;}
+.modal-x{background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color .2s;line-height:1;}
+.modal-x:hover{color:var(--text);}
+.modal-body{padding:26px;}
+
+/* AUTH TABS */
+.auth-tabs{display:flex;margin-bottom:26px;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.auth-tab{flex:1;padding:10px;text-align:center;font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--muted);font-family:'Syne',sans-serif;transition:all .2s;}
+.auth-tab.active{background:var(--accent);color:#fff;}
+
+/* FORM */
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px;}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:11px 14px;color:var(--text);font-family:'Syne',sans-serif;font-size:.87rem;outline:none;transition:border-color .2s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);}
+.fg select option{background:var(--bg);}
+.fg textarea{resize:vertical;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+/* DROPZONE */
+.dropzone{border:2px dashed rgba(59,130,246,.28);border-radius:10px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;margin-bottom:16px;}
+.dropzone:hover,.dropzone.drag{border-color:var(--accent);background:rgba(59,130,246,.05);}
+.dropzone-icon{font-size:2rem;margin-bottom:8px;}
+.dropzone-title{font-weight:700;font-size:.88rem;margin-bottom:4px;}
+.dropzone-sub{font-size:.73rem;color:var(--muted);}
+.dropzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.dz-preview{margin-top:12px;display:none;}
+.dz-preview img{max-height:110px;border-radius:6px;border:1px solid var(--border);}
+
+/* VALIDATION */
+.vbox{border-radius:8px;padding:11px 14px;font-size:.79rem;line-height:1.6;margin-bottom:14px;display:none;white-space:pre-line;}
+.vbox.err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#fca5a5;}
+.vbox.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#86efac;}
+.vbox.show{display:block;}
+
+/* SIZE GUIDE */
+.size-guide{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:13px 15px;margin-bottom:18px;font-size:.78rem;}
+.sg-title{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.sg-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.sg-row:last-child{border:none;}
+.sg-type{font-weight:700;}
+.sg-size{color:var(--sky);font-family:monospace;letter-spacing:.5px;}
+
+/* TOAST */
+.toast-wrap{position:fixed;bottom:26px;right:26px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
+.toast{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 18px;font-size:.81rem;min-width:220px;display:flex;align-items:center;gap:10px;animation:toastIn .3s ease;pointer-events:auto;}
+.toast.ok{border-left:3px solid var(--success);}
+.toast.err{border-left:3px solid var(--danger);}
+@keyframes toastIn{from{opacity:0;transform:translateX(28px);}to{opacity:1;transform:none;}}
+@keyframes toastOut{to{opacity:0;transform:translateX(28px);}}
+
+/* USER MENU */
+.umenu-wrap{position:relative;}
+.umenu-btn{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px;cursor:pointer;font-size:.8rem;font-weight:600;transition:border-color .2s;font-family:'Syne',sans-serif;}
+.umenu-btn:hover{border-color:var(--accent);}
+.u-avatar{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;flex-shrink:0;}
+.umenu-drop{position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;min-width:170px;overflow:hidden;display:none;animation:modalIn .18s ease;z-index:300;}
+.umenu-drop.open{display:block;}
+.umenu-drop button{display:flex;align-items:center;gap:10px;padding:11px 15px;font-size:.8rem;color:var(--text);cursor:pointer;border:none;background:none;font-family:'Syne',sans-serif;width:100%;transition:background .15s;}
+.umenu-drop button:hover{background:rgba(255,255,255,.05);}
+
+/* CONTACT */
+#contact{background:var(--card);border-top:1px solid var(--border);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:70px;max-width:960px;}
+.ci{display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;}
+.ci-icon{width:38px;height:38px;border-radius:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.ci small{font-size:.63rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.ci p{font-size:.88rem;font-weight:600;margin-top:2px;}
+
+/* ROBLOX GROUP CARD */
+.rg-card{margin-top:26px;background:var(--bg);border:1px solid rgba(125,211,252,.2);border-radius:12px;padding:20px;transition:border-color .2s,box-shadow .2s;}
+.rg-card:hover{border-color:rgba(125,211,252,.45);box-shadow:0 8px 30px rgba(0,0,0,.3);}
+.rg-head{display:flex;align-items:center;gap:13px;margin-bottom:12px;}
+.rg-ico{width:40px;height:40px;border-radius:9px;background:rgba(125,211,252,.1);border:1px solid rgba(125,211,252,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.rg-label{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.rg-name{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:2px;line-height:1.1;}
+.rg-badge{margin-left:auto;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;background:rgba(125,211,252,.1);border:1px solid rgba(125,211,252,.22);color:var(--sky);padding:3px 10px;border-radius:100px;flex-shrink:0;}
+.rg-desc{font-size:.81rem;color:var(--muted);line-height:1.65;margin-bottom:16px;}
+.rg-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.22);color:var(--sky);font-size:.76rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:9px 18px;border-radius:6px;text-decoration:none;transition:all .2s;font-family:'Syne',sans-serif;}
+.rg-btn:hover{background:rgba(125,211,252,.18);border-color:var(--sky);transform:translateY(-1px);}
+
+/* CONTACT FORM */
+.cform{display:flex;flex-direction:column;}
+
+/* AI MODAL */
+.ai-dropzone{border-color:rgba(168,85,247,.28);}
+.ai-dropzone:hover,.ai-dropzone.drag{border-color:#a855f7;background:rgba(168,85,247,.05);}
+.ai-spinner{width:46px;height:46px;border:3px solid rgba(168,85,247,.2);border-top-color:#a855f7;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 18px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ai-load-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;margin-bottom:18px;background:linear-gradient(135deg,#a78bfa,#f0abfc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+.ai-steps{display:flex;flex-direction:column;gap:9px;max-width:280px;margin:0 auto;}
+.ai-step{font-size:.81rem;color:var(--muted);padding:8px 13px;border-radius:6px;border:1px solid transparent;transition:all .4s;}
+.ai-step.active{color:var(--text);background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.25);}
+.ai-res-head{display:flex;gap:16px;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:15px;margin-bottom:18px;}
+.ai-res-img{width:76px;height:76px;object-fit:contain;border-radius:6px;background:var(--surface);padding:4px;}
+.ai-score-label{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.ai-score{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:2px;line-height:1;}
+.ai-type-tag{margin-top:4px;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:#a78bfa;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);padding:2px 9px;border-radius:100px;display:inline-block;}
+.ai-verdict{font-size:.95rem;font-style:italic;color:var(--text);line-height:1.6;border-left:3px solid #a855f7;padding-left:13px;margin-bottom:16px;}
+.ai-two{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:12px;}
+.ai-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:13px;}
+.ai-box.good{border-color:rgba(34,197,94,.2);}
+.ai-box.bad{border-color:rgba(239,68,68,.2);}
+.ai-box-title{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:7px;}
+.ai-box ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.ai-box ul li{font-size:.77rem;line-height:1.5;}
+.ai-box.good ul li{color:#86efac;}
+.ai-box.bad ul li{color:#fca5a5;}
+.ai-trend,.ai-advice{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:13px;margin-bottom:11px;font-size:.81rem;color:var(--muted);line-height:1.65;}
+.ai-trend{border-color:rgba(59,130,246,.2);}
+.ai-advice{border-color:rgba(251,191,36,.2);}
+.ai-trend p,.ai-advice p{color:var(--text);margin-top:5px;}
+.ai-box-hd{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:5px;}
+@media(max-width:480px){.ai-two{grid-template-columns:1fr;}}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:30px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.f-brand{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:4px;}
+.f-brand em{color:var(--accent);font-style:normal;}
+.f-copy{font-size:.71rem;color:var(--muted);}
+.f-copy a{color:var(--sky);text-decoration:none;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media(max-width:820px){
+  nav{padding:13px 18px;}
+  .nav-center{display:none;}
+  .section{padding:60px 20px;}
+  .hero{padding:100px 20px 60px;}
+  .contact-grid{grid-template-columns:1fr;gap:40px;}
+  .form-row{grid-template-columns:1fr;}
+  footer{padding:24px 20px;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="aa8299ec-813a-4a4c-ad42-fbb83d49faa8.jpg" alt="Logo" onerror="this.style.display='none'"/>
+    <span class="nav-brand">Ro<em>Co</em></span>
+  </a>
+  <ul class="nav-center">
+    <li><a href="#gallery">Templates</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right" id="navRight">
+    <!-- rendered by JS -->
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-blob"></div>
+  <div class="hero-content">
+    <div class="hero-pill"><span class="hero-dot"></span>Free · No Copyright · Roblox Clothing</div>
+    <h1 class="hero-title">Free<br><span class="ca">Roblox</span><br><span class="cb">Clothing.</span></h1>
+    <p class="hero-sub">Browse and download free Roblox clothing templates.<br>Shirts, T-Shirts, Pants — 100% copyright-free. Use or redesign freely.</p>
+    <div class="hero-ctas">
+      <a href="#gallery" class="btn btn-primary">Browse Templates</a>
+      <button class="btn btn-outline" onclick="openUploadModal()">Upload a Template</button>
+    </div>
+    <div class="size-chips">
+      <div class="size-chip"><div class="size-chip-label">Shirt</div><div class="size-chip-val">585 × 559 px</div></div>
+      <div class="size-chip"><div class="size-chip-label">T-Shirt</div><div class="size-chip-val">128 × 128 px</div></div>
+      <div class="size-chip"><div class="size-chip-label">Pants</div><div class="size-chip-val">585 × 559 px</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section">
+  <div class="gallery-top reveal">
+    <div>
+      <div class="section-tag">/ Templates</div>
+      <h2 class="section-title">Browse & Download</h2>
+      <p class="section-desc">All templates are free to use, redesign, and publish. No credit required.</p>
+    </div>
+    <div class="filter-row">
+      <button class="ftab active" data-filter="all">All</button>
+      <button class="ftab" data-filter="Shirt">Shirts</button>
+      <button class="ftab" data-filter="T-Shirt">T-Shirts</button>
+      <button class="ftab" data-filter="Pants">Pants</button>
+    </div>
+  </div>
+  <div class="grid" id="templateGrid"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-tag">/ Contact</div>
+      <h2 class="section-title">Get In Touch.</h2>
+      <p class="section-desc" style="margin-bottom:26px;">Template requests, issues, or collabs — reach out.</p>
+      <div class="ci">
+        <div class="ci-icon">🎮</div>
+        <div><small>Roblox</small><p>@Dwgzz</p></div>
+      </div>
+      <div class="ci">
+        <div class="ci-icon">💬</div>
+        <div><small>Discord</small><p>RoCo Community</p></div>
+      </div>
+      <!-- ROBLOX GROUP CARD -->
+      <div class="rg-card">
+        <div class="rg-head">
+          <div class="rg-ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 3L19 7L15 19L3 14L5 3Z" fill="#7dd3fc"/><path d="M9 8L15 10L13 16L7 13L9 8Z" fill="#0b0f1a"/></svg>
+          </div>
+          <div>
+            <div class="rg-label">Roblox Group</div>
+            <div class="rg-name">Dwgzz</div>
+          </div>
+          <div class="rg-badge">Official</div>
+        </div>
+        <p class="rg-desc">Join the official Dwgzz Roblox community. Stay updated on new templates, events, and releases.</p>
+        <a href="https://www.roblox.com/communities/545154425/Dwgzz#!/about" target="_blank" rel="noopener" class="rg-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 3L19 7L15 19L3 14L5 3Z" fill="currentColor"/></svg>
+          View Group on Roblox ↗
+        </a>
+      </div>
+    </div>
+    <form class="cform reveal" onsubmit="submitContact(event)">
+      <div class="form-row" style="margin-bottom:0;">
+        <div class="fg"><label>Name</label><input type="text" placeholder="Your name" required/></div>
+        <div class="fg"><label>Roblox Username</label><input type="text" placeholder="@username"/></div>
+      </div>
+      <div class="fg">
+        <label>Subject</label>
+        <select><option>Template Request</option><option>Bug Report</option><option>Collaboration</option><option>Other</option></select>
+      </div>
+      <div class="fg"><label>Message</label><textarea placeholder="What's on your mind?" rows="4" required></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand">Ro<em>Co</em></div>
+  <div class="f-copy">© 2025 RoCo · Made by <a href="#">Dwgzz</a> · All templates are free &amp; copyright-free</div>
+</footer>
+
+<!-- TOASTS -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ═══ AUTH MODAL ═══ -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-head">
+      <span class="modal-title" id="authTitle">SIGN IN</span>
+      <button class="modal-x" onclick="closeModal('authModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Login</button>
+        <button class="auth-tab" id="tabReg" onclick="switchTab('register')">Register</button>
+      </div>
+      <!-- LOGIN -->
+      <form id="loginForm" onsubmit="doLogin(event)">
+        <div class="fg"><label>Username</label><input type="text" id="liUser" placeholder="Your username" required/></div>
+        <div class="fg"><label>Password</label><input type="password" id="liPass" placeholder="Your password" required/></div>
+        <div class="vbox err" id="liErr"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Login →</button>
+      </form>
+      <!-- REGISTER -->
+      <form id="regForm" style="display:none" onsubmit="doRegister(event)">
+        <div class="fg"><label>Username</label><input type="text" id="rgUser" placeholder="Choose a username" required/></div>
+        <div class="fg"><label>Roblox Username</label><input type="text" id="rgRoblox" placeholder="Your Roblox @"/></div>
+        <div class="fg"><label>Password</label><input type="password" id="rgPass" placeholder="Create a password" required/></div>
+        <div class="fg"><label>Confirm Password</label><input type="password" id="rgPass2" placeholder="Repeat password" required/></div>
+        <div class="vbox err" id="rgErr"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Create Account →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ UPLOAD MODAL ═══ -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">UPLOAD TEMPLATE</span>
+      <button class="modal-x" onclick="closeModal('uploadModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="size-guide">
+        <div class="sg-title">Required Roblox Template Sizes</div>
+        <div class="sg-row"><span class="sg-type">Shirt</span><span class="sg-size">585 × 559 px</span></div>
+        <div class="sg-row"><span class="sg-type">T-Shirt</span><span class="sg-size">128 × 128 px</span></div>
+        <div class="sg-row"><span class="sg-type">Pants</span><span class="sg-size">585 × 559 px</span></div>
+      </div>
+      <form id="uploadForm" onsubmit="doUpload(event)">
+        <div class="fg"><label>Template Name</label><input type="text" id="upName" placeholder="Name your template" required maxlength="48"/></div>
+        <div class="fg">
+          <label>Item Type</label>
+          <select id="upType" required onchange="onUpTypeChange()">
+            <option value="">— Select item type —</option>
+            <option value="Shirt">Shirt (585 × 559 px)</option>
+            <option value="T-Shirt">T-Shirt (128 × 128 px)</option>
+            <option value="Pants">Pants (585 × 559 px)</option>
+          </select>
+        </div>
+        <div class="dropzone" id="upDz" ondragover="onDzDrag(event,true)" ondragleave="onDzDrag(event,false)" ondrop="onUpDrop(event)">
+          <div class="dropzone-icon">🖼️</div>
+          <div class="dropzone-title">Drop image here or click to browse</div>
+          <div class="dropzone-sub" id="upDzSub">Select an item type first</div>
+          <input type="file" id="upFile" accept="image/png,image/jpeg" onchange="onUpFileChange(event)" disabled/>
+          <div class="dz-preview" id="upPreview"><img id="upPreviewImg" src="" alt="preview"/></div>
+        </div>
+        <div class="vbox" id="upVal"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%" id="upBtn" disabled>Upload Template</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ AI REVIEW MODAL ═══ -->
+<div class="modal-overlay" id="aiModal">
+  <div class="modal" style="max-width:540px;">
+    <div class="modal-head" style="background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(168,85,247,.08));border-bottom-color:rgba(168,85,247,.2);">
+      <div>
+        <div class="modal-title" style="background:linear-gradient(135deg,#a78bfa,#f0abfc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">✦ AI REVIEW</div>
+        <div style="font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:#a78bfa;margin-top:1px;">Claude AI + Live Trend Search</div>
+      </div>
+      <button class="modal-x" onclick="closeModal('aiModal')">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- STEP 1: upload -->
+      <div id="aiS1">
+        <p style="font-size:.87rem;color:var(--muted);line-height:1.7;margin-bottom:20px;">Upload your clothing template and the AI will analyze it, check <strong style="color:var(--text)">current Roblox marketplace trends</strong>, and give you an honest review.</p>
+        <div class="fg">
+          <label>What are you uploading?</label>
+          <select id="aiType" onchange="onAiTypeChange()">
+            <option value="">— Select item type —</option>
+            <option value="Shirt">Shirt (585 × 559 px)</option>
+            <option value="T-Shirt">T-Shirt (128 × 128 px)</option>
+            <option value="Pants">Pants (585 × 559 px)</option>
+          </select>
+        </div>
+        <div class="dropzone ai-dropzone" id="aiDz" ondragover="onDzDrag(event,true)" ondragleave="onDzDrag(event,false)" ondrop="onAiDrop(event)">
+          <div class="dropzone-icon">🎨</div>
+          <div class="dropzone-title">Drop your template here or click to browse</div>
+          <div class="dropzone-sub" id="aiDzSub">Select item type first</div>
+          <input type="file" id="aiFile" accept="image/png,image/jpeg" onchange="onAiFileChange(event)" disabled/>
+          <div class="dz-preview" id="aiPreview"><img id="aiPreviewImg" src="" alt="preview"/></div>
+        </div>
+        <div class="vbox" id="aiVal"></div>
+        <button class="btn btn-ai" style="width:100%;justify-content:center;padding:13px 22px;font-size:.87rem;" id="aiBtn" onclick="runAiReview()" disabled>✦ Analyze My Design</button>
+      </div>
+
+      <!-- STEP 2: loading -->
+      <div id="aiS2" style="display:none;text-align:center;padding:16px 0 8px;">
+        <div class="ai-spinner"></div>
+        <div class="ai-load-title">Analyzing your design...</div>
+        <div class="ai-steps">
+          <div class="ai-step active" id="lst1">🔍 Reading your template</div>
+          <div class="ai-step" id="lst2">🌐 Searching Roblox marketplace trends</div>
+          <div class="ai-step" id="lst3">🧠 Writing your review</div>
+        </div>
+      </div>
+
+      <!-- STEP 3: result -->
+      <div id="aiS3" style="display:none;">
+        <div class="ai-res-head">
+          <img class="ai-res-img" id="aiResImg" src="" alt=""/>
+          <div>
+            <div class="ai-score-label">Marketplace Score</div>
+            <div class="ai-score" id="aiScore">—</div>
+            <div class="ai-type-tag" id="aiTypeTag"></div>
+          </div>
+        </div>
+        <div id="aiReviewBody"></div>
+        <div style="display:flex;gap:10px;margin-top:16px;">
+          <button class="btn btn-outline btn-sm" style="flex:1" onclick="resetAiModal()">↩ Review Another</button>
+          <button class="btn btn-ghost btn-sm" style="flex:1" onclick="closeModal('aiModal');openUploadModal()">Upload This Template</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── CONSTANTS ────────────────────────────────────────────────────────────────
+const SIZES = { 'Shirt':{w:585,h:559}, 'T-Shirt':{w:128,h:128}, 'Pants':{w:585,h:559} };
+
+// ─── STORAGE ─────────────────────────────────────────────────────────────────
+const getUsers     = () => { try{return JSON.parse(localStorage.getItem('roco_users')||'{}')}catch(e){return{}} };
+const getTemplates = () => { try{return JSON.parse(localStorage.getItem('roco_tmpls')||'[]')}catch(e){return[]} };
+const saveUsers    = u  => localStorage.setItem('roco_users', JSON.stringify(u));
+const saveTemplates= t  => localStorage.setItem('roco_tmpls', JSON.stringify(t));
+const getSession   = () => localStorage.getItem('roco_sess') || null;
+const setSession   = u  => localStorage.setItem('roco_sess', u);
+const clearSession = () => localStorage.removeItem('roco_sess');
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let currentUser   = getSession();
+let upFile        = null;
+let upValid       = false;
+let aiFile        = null;
+let aiValid       = false;
+let currentFilter = 'all';
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function toast(msg, type='ok') {
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span>${type==='ok'?'✓':'✕'}</span> ${msg}`;
+  document.getElementById('toastWrap').appendChild(el);
+  setTimeout(() => { el.style.animation='toastOut .3s ease forwards'; setTimeout(()=>el.remove(),300); }, 3000);
+}
+
+// ─── NAV ──────────────────────────────────────────────────────────────────────
+function renderNav() {
+  const nr = document.getElementById('navRight');
+  if (currentUser) {
+    nr.innerHTML = `
+      <button class="btn btn-ai btn-sm" onclick="openAiModal()">✦ AI Review</button>
+      <button class="btn btn-ghost btn-sm" onclick="openUploadModal()">+ Upload</button>
+      <div class="umenu-wrap">
+        <div class="umenu-btn" onclick="toggleUMenu()">
+          <div class="u-avatar">${currentUser[0].toUpperCase()}</div>
+          <span>${currentUser}</span>
+          <span style="color:var(--muted);font-size:.65rem;margin-left:2px">▾</span>
+        </div>
+        <div class="umenu-drop" id="uDrop">
+          <button onclick="doLogout()">🚪 Sign Out</button>
+        </div>
+      </div>`;
+  } else {
+    nr.innerHTML = `
+      <button class="btn btn-ai btn-sm" onclick="openAiModal()">✦ AI Review</button>
+      <button class="btn btn-outline btn-sm" onclick="openAuthModal('login')">Login</button>
+      <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Register</button>`;
+  }
+}
+
+function toggleUMenu() { document.getElementById('uDrop')?.classList.toggle('open'); }
+document.addEventListener('click', e => { if (!e.target.closest('.umenu-wrap')) document.getElementById('uDrop')?.classList.remove('open'); });
+
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
+function openAuthModal(tab) { switchTab(tab); openModal('authModal'); }
+function switchTab(tab) {
+  document.getElementById('loginForm').style.display = tab==='login' ? '' : 'none';
+  document.getElementById('regForm').style.display   = tab==='register' ? '' : 'none';
+  document.getElementById('tabLogin').classList.toggle('active', tab==='login');
+  document.getElementById('tabReg').classList.toggle('active', tab==='register');
+  document.getElementById('authTitle').textContent = tab==='login' ? 'SIGN IN' : 'CREATE ACCOUNT';
+  clearV('liErr'); clearV('rgErr');
+}
+
+function doLogin(e) {
+  e.preventDefault();
+  const u = document.getElementById('liUser').value.trim();
+  const p = document.getElementById('liPass').value;
+  const users = getUsers();
+  if (!users[u] || users[u].password !== p) { showV('liErr','err','Incorrect username or password.'); return; }
+  currentUser = u; setSession(u);
+  closeModal('authModal'); renderNav();
+  toast(`Welcome back, ${u}!`);
+}
+
+function doRegister(e) {
+  e.preventDefault();
+  const u  = document.getElementById('rgUser').value.trim();
+  const rb = document.getElementById('rgRoblox').value.trim();
+  const p  = document.getElementById('rgPass').value;
+  const p2 = document.getElementById('rgPass2').value;
+  if (u.length < 3)  { showV('rgErr','err','Username must be at least 3 characters.'); return; }
+  if (p.length < 6)  { showV('rgErr','err','Password must be at least 6 characters.'); return; }
+  if (p !== p2)      { showV('rgErr','err','Passwords do not match.'); return; }
+  const users = getUsers();
+  if (users[u])      { showV('rgErr','err','That username is already taken.'); return; }
+  users[u] = { password:p, roblox:rb, joined:Date.now() };
+  saveUsers(users);
+  currentUser = u; setSession(u);
+  closeModal('authModal'); renderNav();
+  toast(`Welcome to RoCo, ${u}!`);
+}
+
+function doLogout() { clearSession(); currentUser = null; renderNav(); toast('Signed out.'); }
+
+// ─── UPLOAD ───────────────────────────────────────────────────────────────────
+function openUploadModal() {
+  if (!currentUser) { openAuthModal('login'); toast('Please log in to upload templates.','err'); return; }
+  resetUpForm(); openModal('uploadModal');
+}
+
+function onUpTypeChange() {
+  const type = document.getElementById('upType').value;
+  const fi   = document.getElementById('upFile');
+  const sub  = document.getElementById('upDzSub');
+  if (type) { fi.disabled = false; const s=SIZES[type]; sub.textContent=`Required: ${s.w} × ${s.h} px`; }
+  else      { fi.disabled = true;  sub.textContent = 'Select an item type first'; }
+  upFile=null; upValid=false;
+  document.getElementById('upPreview').style.display='none';
+  clearV('upVal');
+  document.getElementById('upBtn').disabled=true;
+}
+
+function onUpDrop(e)     { e.preventDefault(); onDzDrag(e,false); const f=e.dataTransfer.files[0]; if(f) processUpFile(f); }
+function onUpFileChange(e){ const f=e.target.files[0]; if(f) processUpFile(f); }
+
+function processUpFile(file) {
+  const type = document.getElementById('upType').value;
+  if (!type) { showV('upVal','err','Select an item type first.'); return; }
+  if (!file.type.match(/image\/(png|jpeg)/)) { showV('upVal','err','Only PNG or JPG accepted.'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const req = SIZES[type];
+      if (img.width !== req.w || img.height !== req.h) {
+        showV('upVal','err',`✕ Wrong size!\n\nYour image: ${img.width} × ${img.height} px\nRequired for ${type}: ${req.w} × ${req.h} px\n\nResize your image and try again.`);
+        upFile=null; upValid=false;
+        document.getElementById('upBtn').disabled=true;
+        document.getElementById('upPreview').style.display='none';
+        return;
+      }
+      upFile={file,dataUrl:ev.target.result};
+      upValid=true;
+      showV('upVal','ok',`✓ Size verified — ${img.width} × ${img.height} px. Ready to upload!`);
+      document.getElementById('upPreviewImg').src = ev.target.result;
+      document.getElementById('upPreview').style.display = 'block';
+      document.getElementById('upBtn').disabled = false;
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function doUpload(e) {
+  e.preventDefault();
+  if (!upValid || !upFile) { toast('Please select a valid image first.','err'); return; }
+  const name = document.getElementById('upName').value.trim();
+  const type = document.getElementById('upType').value;
+  if (!name || !type) { toast('Fill in all fields.','err'); return; }
+  const tmpls = getTemplates();
+  tmpls.unshift({ id:Date.now().toString(), name, type, uploader:currentUser, dataUrl:upFile.dataUrl, uploadedAt:Date.now(), downloads:0 });
+  saveTemplates(tmpls);
+  closeModal('uploadModal');
+  toast(`"${name}" uploaded!`);
+  renderGallery();
+}
+
+function resetUpForm() {
+  document.getElementById('uploadForm').reset();
+  document.getElementById('upFile').disabled=true;
+  document.getElementById('upDzSub').textContent='Select an item type first';
+  document.getElementById('upPreview').style.display='none';
+  upFile=null; upValid=false; clearV('upVal');
+  document.getElementById('upBtn').disabled=true;
+}
+
+// ─── AI REVIEW ────────────────────────────────────────────────────────────────
+function openAiModal() { resetAiModal(); openModal('aiModal'); }
+
+function onAiTypeChange() {
+  const type = document.getElementById('aiType').value;
+  const fi   = document.getElementById('aiFile');
+  const sub  = document.getElementById('aiDzSub');
+  if (type) { fi.disabled=false; const s=SIZES[type]; sub.textContent=`Required: ${s.w} × ${s.h} px`; }
+  else      { fi.disabled=true; sub.textContent='Select item type first'; }
+  aiFile=null; aiValid=false;
+  document.getElementById('aiPreview').style.display='none';
+  clearV('aiVal');
+  document.getElementById('aiBtn').disabled=true;
+}
+
+function onAiDrop(e)     { e.preventDefault(); onDzDrag(e,false); const f=e.dataTransfer.files[0]; if(f) processAiFile(f); }
+function onAiFileChange(e){ const f=e.target.files[0]; if(f) processAiFile(f); }
+
+function processAiFile(file) {
+  const type = document.getElementById('aiType').value;
+  if (!type) { showV('aiVal','err','Select an item type first.'); return; }
+  if (!file.type.match(/image\/(png|jpeg)/)) { showV('aiVal','err','Only PNG or JPG accepted.'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const req = SIZES[type];
+      if (img.width !== req.w || img.height !== req.h) {
+        showV('aiVal','err',`✕ Wrong size!\n\nYour image: ${img.width} × ${img.height} px\nRequired for ${type}: ${req.w} × ${req.h} px\n\nResize and try again.`);
+        aiFile=null; aiValid=false;
+        document.getElementById('aiBtn').disabled=true;
+        document.getElementById('aiPreview').style.display='none';
+        return;
+      }
+      aiFile = { dataUrl:ev.target.result, mimeType:file.type };
+      aiValid = true;
+      showV('aiVal','ok',`✓ Size verified — ${img.width} × ${img.height} px. Ready to analyze!`);
+      document.getElementById('aiPreviewImg').src = ev.target.result;
+      document.getElementById('aiPreview').style.display = 'block';
+      document.getElementById('aiBtn').disabled = false;
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function runAiReview() {
+  if (!aiValid || !aiFile) return;
+  const type = document.getElementById('aiType').value;
+
+  document.getElementById('aiS1').style.display = 'none';
+  document.getElementById('aiS2').style.display = 'block';
+
+  const steps = ['lst1','lst2','lst3'];
+  let si = 0;
+  const intv = setInterval(() => {
+    steps.forEach(s => document.getElementById(s)?.classList.remove('active'));
+    if (si < steps.length) document.getElementById(steps[si])?.classList.add('active');
+    si++;
+    if (si > steps.length) clearInterval(intv);
+  }, 1800);
+
+  try {
+    const b64 = aiFile.dataUrl.split(',')[1];
+
+    const resp = await fetch('/api/review', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        imageBase64: b64,
+        mimeType: aiFile.mimeType,
+        itemType: type
+      })
+    });
+
+    clearInterval(intv);
+
+    if (!resp.ok) {
+      const errData = await resp.json().catch(() => ({}));
+      throw new Error(errData?.error || `Server error ${resp.status}`);
+    }
+
+    const result = await resp.json();
+    showAiResult(result, type);
+
+  } catch(err) {
+    clearInterval(intv);
+    document.getElementById('aiS2').style.display='none';
+    document.getElementById('aiS1').style.display='block';
+    const isFetchError = err.message === 'Failed to fetch' || err.message.includes('fetch');
+    const msg = isFetchError
+      ? '⚠️ Could not connect to the server.\n\nMake sure you:\n1. Ran "npm install" in your roco/ folder\n2. Started the server with "npm start"\n3. Are visiting http://localhost:3000 (not opening the HTML file directly)'
+      : `AI review failed: ${err.message}`;
+    showV('aiVal','err', msg);
+    console.error(err);
+  }
+}
+
+function showAiResult(r, type) {
+  document.getElementById('aiS2').style.display = 'none';
+  document.getElementById('aiS3').style.display = 'block';
+  document.getElementById('aiResImg').src = aiFile.dataUrl;
+  const scoreEl = document.getElementById('aiScore');
+  scoreEl.textContent = r.score + '/10';
+  scoreEl.style.color = r.score>=7 ? 'var(--success)' : r.score>=5 ? '#fbbf24' : 'var(--danger)';
+  document.getElementById('aiTypeTag').textContent = type;
+
+  document.getElementById('aiReviewBody').innerHTML = `
+    <div class="ai-verdict">"${r.verdict}"</div>
+    <div class="ai-two">
+      <div class="ai-box good">
+        <div class="ai-box-title">Strengths</div>
+        <ul>${(r.strengths||[]).map(s=>`<li>✓ ${s}</li>`).join('')}</ul>
+      </div>
+      <div class="ai-box bad">
+        <div class="ai-box-title">Weaknesses</div>
+        <ul>${(r.weaknesses||[]).map(w=>`<li>✕ ${w}</li>`).join('')}</ul>
+      </div>
+    </div>
+    <div class="ai-trend"><div class="ai-box-hd">📈 Trend Analysis</div><p>${r.trend_note}</p></div>
+    <div class="ai-advice"><div class="ai-box-hd">💡 Top Advice</div><p>${r.advice}</p></div>`;
+}
+
+function resetAiModal() {
+  document.getElementById('aiS1').style.display='block';
+  document.getElementById('aiS2').style.display='none';
+  document.getElementById('aiS3').style.display='none';
+  document.getElementById('aiType').value='';
+  document.getElementById('aiFile').value='';
+  document.getElementById('aiFile').disabled=true;
+  document.getElementById('aiDzSub').textContent='Select item type first';
+  document.getElementById('aiPreview').style.display='none';
+  document.getElementById('aiBtn').disabled=true;
+  // keep API key so user doesn't have to re-enter it
+  clearV('aiVal');
+  aiFile=null; aiValid=false;
+  const resetSteps=['lst1','lst2','lst3'];
+  resetSteps.forEach(s=>document.getElementById(s)?.classList.remove('active'));
+  document.getElementById('lst1')?.classList.add('active');
+}
+
+// ─── GALLERY ─────────────────────────────────────────────────────────────────
+function renderGallery() {
+  const grid = document.getElementById('templateGrid');
+  let tmpls = getTemplates();
+  if (currentFilter !== 'all') tmpls = tmpls.filter(t => t.type === currentFilter);
+  if (!tmpls.length) {
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">👕</div><p>No templates yet.<br>Be the first to upload one!</p></div>`;
+    return;
+  }
+  grid.innerHTML = tmpls.map(t => {
+    const bc = t.type==='Shirt' ? 'tb-shirt' : t.type==='T-Shirt' ? 'tb-tshirt' : 'tb-pants';
+    return `<div class="tcard">
+      <div class="tcard-img">
+        ${t.dataUrl ? `<img src="${t.dataUrl}" alt="${t.name}"/>` : '<div class="tcard-img-ph">👕</div>'}
+        <span class="tcard-badge ${bc}">${t.type}</span>
+      </div>
+      <div class="tcard-body">
+        <div class="tcard-title">${t.name}</div>
+        <div class="tcard-meta">${new Date(t.uploadedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+        <div class="tcard-foot">
+          <div class="tcard-by">by <span>${t.uploader}</span></div>
+          <button class="btn btn-ghost btn-sm" onclick="downloadTpl('${t.id}')">Download</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function downloadTpl(id) {
+  const tmpls = getTemplates();
+  const t = tmpls.find(x => x.id===id);
+  if (!t || !t.dataUrl) return;
+  tmpls.find(x=>x.id===id).downloads = (t.downloads||0)+1;
+  saveTemplates(tmpls);
+  const a = document.createElement('a');
+  a.href = t.dataUrl;
+  a.download = `${t.name.replace(/\s+/g,'-')}-roco.png`;
+  a.click();
+  toast(`Downloading "${t.name}"...`);
+}
+
+document.querySelectorAll('.ftab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderGallery();
+  });
+});
+
+// ─── MODALS ───────────────────────────────────────────────────────────────────
+function openModal(id)  { document.getElementById(id).classList.add('open');    document.body.style.overflow='hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target===o) closeModal(o.id); });
+});
+
+// ─── SHARED HELPERS ───────────────────────────────────────────────────────────
+function showV(id, type, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.className = `vbox ${type} show`;
+  el.textContent = msg;
+}
+function clearV(id) {
+  const el = document.getElementById(id);
+  if (el) { el.className='vbox'; el.textContent=''; }
+}
+function onDzDrag(e, active) {
+  e.preventDefault();
+  const dz = e.target.closest('.dropzone');
+  if (dz) dz.classList.toggle('drag', active);
+}
+
+// ─── CONTACT ─────────────────────────────────────────────────────────────────
+function submitContact(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  btn.textContent = '✓ Sent!';
+  btn.style.background = '#166534';
+  setTimeout(() => { btn.textContent='Send Message →'; btn.style.background=''; e.target.reset(); }, 3000);
+}
+
+// ─── REVEAL ON SCROLL ────────────────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((en, i) => { if(en.isIntersecting) setTimeout(()=>en.target.classList.add('visible'), i*80); });
+}, { threshold:0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderNav();
+renderGallery();
+</script>
+</body>
+</html>
